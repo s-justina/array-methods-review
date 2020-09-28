@@ -28,7 +28,8 @@ function App() {
         (personInDepartment) => +personInDepartment.salary.slice(1)
       );
       const averageSalary =
-        "$" + (salaries.reduce((acc, cur) => acc + cur) / salaries.length).toFixed(2);
+        "$" +
+        (salaries.reduce((acc, cur) => acc + cur) / salaries.length).toFixed(2);
       return {
         department: department,
         department_worker_list: namesPeopleInDepartment,
@@ -38,8 +39,22 @@ function App() {
 
     return departmentObjectData;
   };
-  console.log(departmentData());
+  // console.log(departmentData());
 
+  // zadanie 3 - stwórz funkcję, która edytuje dane w tabeli.
+  console.log('firstly', mockedData)
+  const editPersonalData = (fieldToEdit, newValue, idPersonToEdit) => {
+    const newMockData = JSON.parse(JSON.stringify(mockedData));
+    const exist = newMockData.find((data) => data.id === idPersonToEdit);
+    if (!exist)
+      return "Please check id of person which data you want to edit. Given id does not exist.";
+    else {
+      exist[fieldToEdit] = newValue;
+      return newMockData;
+    }
+  };
+
+console.log(editPersonalData('first_name', 'DUDA', 1));
   return (
     <div className="App">
       <header className="App-header">
